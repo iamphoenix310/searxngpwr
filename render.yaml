@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: searxng
+    env: docker
+    repo: https://github.com/iamphoenix310/searxngpwr
+    plan: free
+    autoDeploy: true
+    dockerfilePath: Dockerfile
+    buildCommand: ""
+    startCommand: "./manage.sh run"
