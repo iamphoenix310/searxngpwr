@@ -1,25 +1,22 @@
+# Start from a lightweight Python image
 FROM python:3.11-slim
 
-ENV PYTHONUNBUFFERED=1
-
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-  build-essential \
-  redis \
-  firefox-esr \
-  graphviz \
-  imagemagick \
-  librsvg2-bin \
-  fonts-dejavu \
-  shellcheck \
-  && apt-get clean && rm -rf /var/lib/apt/lists/*
-
+# Set working directory
 WORKDIR /app
 
-COPY . .
+# Install dependencies
+RUN apt-get update && \
+    apt-get install -y build-essential git libxslt1-dev libxml2-dev libffi-dev libssl-dev libjpeg-dev zlib1g-dev \
+    redis firefox-esr graphviz imagemagick librsvg2-bin fonts-dejavu shellcheck
 
-RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
+# Copy everything into container
+COPY . /app
 
+# Install Python packages
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Expose the default port used by SearXNG
 EXPOSE 8080
 
-CMD ["python3", "searx/webapp.py"]
+# Start the app
+CMD ["python", "-m", "searx.webapp"]
