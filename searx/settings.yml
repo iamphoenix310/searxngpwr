@@ -48,4 +48,4 @@ engines:
 
 # Remove this block if Redis is not configured
 redis:
-  url: ${REDIS_URL}
+  url: rediss://default:mF4NvjROCDcoaVyFryDI2AqFnEktLT3f@redis-13087.c82.us-east-1-2.ec2.redns.redis-cloud.com:13087
