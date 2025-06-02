@@ -48,4 +48,4 @@ engines:
 
 # Remove this block if Redis is not configured
 redis:
-  url: redis://default:@localhost:6379
+  url: ${REDIS_URL}
