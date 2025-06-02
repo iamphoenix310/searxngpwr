@@ -43,7 +43,11 @@ def initialize():
         return False
     try:
         # create a client, but no connection is done
-        _CLIENT = redis.Redis.from_url(redis_url)
+        _CLIENT = redis.Redis.from_url(
+            redis_url,
+            ssl=True,
+            ssl_cert_reqs=None  # ✅ Needed for Redis Cloud SSL
+        )
 
         # log the parameters as seen by the redis lib, without the password
         kwargs = _CLIENT.get_connection_kwargs().copy()
